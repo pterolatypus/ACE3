@@ -9,13 +9,22 @@ jobs:
           name: Validate SQF and Config style
           command: python tools/sqf_validator.py && python tools/config_style_checker.py
 
+  validate-headers:
+    docker:
+      - image: acemod/sqflint:latest
+    steps:
+      - checkout
+      - run:
+          name: Validate function header
+          command: python docs/tools/document_functions.py --debug
+
   linting:
     docker:
       - image: acemod/sqflint:latest
     steps:
       - checkout
       - run:
-          name: Lint sqf code
+          name: Lint SQF code
           command: sqflint -d addons || true
 
   armake:
@@ -52,6 +61,7 @@ workflows:
     jobs:
       - linting
       - validate-scripts
+      - validate-headers
       - armake:
           requires:
             - validate-scripts
