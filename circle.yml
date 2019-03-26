@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Validate function header
+          name: Validate function headers
           command: python docs/tools/document_functions.py --debug
 
   linting:
