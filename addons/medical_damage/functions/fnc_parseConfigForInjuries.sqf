@@ -63,18 +63,32 @@ private _selectionSpecificDefault = getNumber (_damageTypesConfig >> "selectionS
     private _entry = _x;
     private _className = configName _entry;
 
-    // Check if this type is in the causes of a wound class, if so, we will store the wound types for this damage type
+    private _damageTypeSubClassConfig = _damageTypesConfig >> _className;
+
+    // Get a list of valid wounds for this damage type 
     private _woundTypes = [];
     {
-        if (_className in (_x select 5)) then {
-            _woundTypes pushBack _x;
+        private _name = configName _x;
+        private _idx = GVAR(woundsData) findIf {(_x select 6) == _name};
+        if (_idx > -1) then {
+            private _wound = +(GVAR(woundsData) select _idx);
+            
+            (_wound select 4) params ["_minDmg", "_maxDmg"];
+            if (isNumber (_x >> "minDamage")) then {
+                _minDmg = _minDmg max (getNumber (_x >> "minDamage"));
+            };
+            if (isNumber (_x >> "maxDamage")) then {
+                _maxDmg = _maxDmg min (getNumber (_x >> "maxDamage"));
+            };
+            
+            _wound set [5, [_minDmg, _maxDmg]];
+            _woundTypes pushBack _wound;
         };
-    } forEach GVAR(woundsData);
-
-    private _damageTypeSubClassConfig = _damageTypesConfig >> _className;
+    } forEach configProperties [_damageTypeSubClassConfig, "isClass _x"];
 
     private _thresholds = GET_ARRAY(_damageTypeSubClassConfig >> "thresholds",_thresholdsDefault);
     private _selectionSpecific = GET_NUMBER(_damageTypeSubClassConfig >> "selectionSpecific",_selectionSpecificDefault);
+
 
     GVAR(allDamageTypesData) setVariable [_className, [_thresholds, _selectionSpecific > 0, _woundTypes]];
     GVAR(damageTypeCache) setVariable [_className, _className];
