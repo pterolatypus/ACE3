@@ -47,6 +47,7 @@
 // --- blood
 // 0.077 l/kg * 80kg = 6.16l
 #define DEFAULT_BLOOD_VOLUME 6.0 // in liters
+#define DEFAULT_BLOOD_O2 6.0 // equiv. liters blood
 
 #define BLOOD_VOLUME_CLASS_1_HEMORRHAGE 6.000 // lost less than 15% blood, Class I Hemorrhage
 #define BLOOD_VOLUME_CLASS_2_HEMORRHAGE 5.100 // lost more than 15% blood, Class II Hemorrhage
@@ -139,6 +140,7 @@
 // Defined here for easy consistency with GETVAR/SETVAR (also a list for reference)
 #define VAR_BLOOD_PRESS       QEGVAR(medical,bloodPressure)
 #define VAR_BLOOD_VOL         QEGVAR(medical,bloodVolume)
+#define VAR_BLOOD_O2		  QEGVAR(medical,bloodO2)
 #define VAR_WOUND_BLEEDING    QEGVAR(medical,woundBleeding)
 #define VAR_CRDC_ARRST        QEGVAR(medical,inCardiacArrest)
 #define VAR_HEART_RATE        QEGVAR(medical,heartRate)
@@ -162,6 +164,7 @@
 // Defined for easy consistency and speed
 #define GET_SM_STATE(_unit)         ([_unit, EGVAR(medical,STATE_MACHINE)] call CBA_statemachine_fnc_getCurrentState)
 #define GET_BLOOD_VOLUME(unit)      (unit getVariable [VAR_BLOOD_VOL, DEFAULT_BLOOD_VOLUME])
+#define GET_BLOOD_O2(unit)          (unit getVariable [VAR_BLOOD_O2, DEFAULT_BLOOD_O2])
 #define GET_WOUND_BLEEDING(unit)    (unit getVariable [VAR_WOUND_BLEEDING, 0])
 #define GET_HEART_RATE(unit)        (unit getVariable [VAR_HEART_RATE, DEFAULT_HEART_RATE])
 #define GET_HEMORRHAGE(unit)        (unit getVariable [VAR_HEMORRHAGE, 0])

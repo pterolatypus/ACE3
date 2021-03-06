@@ -34,6 +34,7 @@ if (_isRespawn) then {
 
     // - Blood and heart ----------------------------------------------------------
     _unit setVariable [VAR_BLOOD_VOL, DEFAULT_BLOOD_VOLUME, true];
+    _unit setVariable [VAR_BLOOD_O2, DEFAULT_BLOOD_O2, true];
     _unit setVariable [VAR_HEART_RATE, DEFAULT_HEART_RATE, true];
     _unit setVariable [VAR_BLOOD_PRESS, [80, 120], true];
     _unit setVariable [VAR_PERIPH_RES, DEFAULT_PERIPH_RES, true];

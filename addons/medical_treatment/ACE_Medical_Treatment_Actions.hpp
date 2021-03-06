@@ -150,7 +150,7 @@ class GVAR(actions) {
         medicRequired = QGVAR(medicIV);
         treatmentTime = QGVAR(treatmentTimeIV);
         items[] = {"ACE_bloodIV"};
-        treatmentLocations = QGVAR(locationIV);
+        treatmentLocations = QGVAR(locationBlood);
         condition = "";
         callbackSuccess = QFUNC(ivBag);
         animationMedic = "AinvPknlMstpSnonWnonDnon_medic1";
@@ -168,6 +168,7 @@ class GVAR(actions) {
         displayName = CSTRING(Actions_Plasma4_1000);
         displayNameProgress = CSTRING(Transfusing_Plasma);
         items[] = {"ACE_plasmaIV"};
+        treatmentLocations = QGVAR(locationPlasma);
         animationMedic = "AinvPknlMstpSnonWnonDnon_medic1";
     };
     class PlasmaIV_500: PlasmaIV {
@@ -182,6 +183,7 @@ class GVAR(actions) {
         displayName = CSTRING(Actions_Saline4_1000);
         displayNameProgress = CSTRING(Transfusing_Saline);
         items[] = {"ACE_salineIV"};
+        treatmentLocations = QGVAR(locationSaline);
         animationMedic = "AinvPknlMstpSnonWnonDnon_medic1";
     };
     class SalineIV_500: SalineIV {

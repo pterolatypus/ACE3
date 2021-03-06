@@ -31,11 +31,15 @@ if (_syncValues) then {
     _unit setVariable [QGVAR(lastMomentValuesSynced), CBA_missionTime];
 };
 
-private _bloodVolume = GET_BLOOD_VOLUME(_unit) + ([_unit, _deltaT, _syncValues] call EFUNC(medical_status,getBloodVolumeChange));
+([_unit, _deltaT, _syncValues] call EFUNC(medical_status,getBloodVolumeChange)) params ["_bloodVolChange","_bloodO2Change"];
+private _bloodVolume = GET_BLOOD_VOLUME(_unit) + _bloodVolChange;
 _bloodVolume = 0 max _bloodVolume min DEFAULT_BLOOD_VOLUME;
+private _bloodO2 = GET_BLOOD_O2(_unit) + _bloodO2Change;
+_bloodO2 = 0 max _bloodO2 min DEFAULT_BLOOD_O2;
 
 // @todo: replace this and the rest of the setVariable with EFUNC(common,setApproximateVariablePublic)
 _unit setVariable [VAR_BLOOD_VOL, _bloodVolume, _syncValues];
+_unit setVariable [VAR_BLOOD_O2, _bloodO2, _syncValues];
 
 // Set variables for synchronizing information across the net
 private _hemorrhage = switch (true) do {

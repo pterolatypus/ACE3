@@ -18,6 +18,7 @@
 params ["_unit"];
 
 if (GET_BLOOD_VOLUME(_unit) < BLOOD_VOLUME_CLASS_2_HEMORRHAGE) exitWith { false };
+if (GET_BLOOD_O2(_unit) < BLOOD_VOLUME_CLASS_2_HERMORRHAGE) exitwith { false };
 if IN_CRDC_ARRST(_unit) exitWith { false };
 
 private _cardiacOutput = [_unit] call FUNC(getCardiacOutput);

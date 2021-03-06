@@ -617,20 +617,25 @@ class ADDON {
     class IV {
         // volume is in millileters
         volume = 1000;
+        oxygen = 1000;
         ratio[] = {};
         type = "Blood";
         class BloodIV {
             volume = 1000;
+            oxygen = 1000;
             ratio[] = {"Plasma", 1};
         };
         class BloodIV_500: BloodIV {
             volume = 500;
+            oxygen = 500;
         };
         class BloodIV_250: BloodIV {
             volume = 250;
+            oxygen = 250;
         };
         class PlasmaIV: BloodIV {
             volume = 1000;
+            oxygen = 0;
             ratio[] = {"Blood", 1};
             type = "Plasma";
         };
@@ -642,6 +647,7 @@ class ADDON {
         };
         class SalineIV: BloodIV {
             volume = 1000;
+            oxygen = 0;
             type = "Saline";
             ratio[] = {};
         };

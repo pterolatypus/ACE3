@@ -21,7 +21,7 @@ params ["_patient", "_bodyPart", "_classname"];
 
 // Exit if patient has max blood volume
 private _bloodVolume = GET_BLOOD_VOLUME(_patient);
-if (_bloodVolume >= DEFAULT_BLOOD_VOLUME) exitWith {};
+//if (_bloodVolume >= DEFAULT_BLOOD_VOLUME) exitWith {};
 
 private _partIndex = ALL_BODY_PARTS find toLower _bodyPart;
 
@@ -30,9 +30,10 @@ private _defaultConfig = configFile >> QUOTE(ADDON) >> "IV";
 private _ivConfig = _defaultConfig >> _classname;
 
 private _volume = GET_NUMBER(_ivConfig >> "volume",getNumber (_defaultConfig >> "volume"));
+private _oxygen = GET_NUMBER(_ivConfig >> "oxygen",getNumber (_defaultConfig >> "oxygen"));
 private _type   = GET_STRING(_ivConfig >> "type",getText (_defaultConfig >> "type"));
 
 // Add IV bag to patient's ivBags array
 private _ivBags = _patient getVariable [QEGVAR(medical,ivBags), []];
-_ivBags pushBack [_volume, _type, _partIndex];
+_ivBags pushBack [_volume, _type, _partIndex, _oxygen];
 _patient setVariable [QEGVAR(medical,ivBags), _ivBags, true];
